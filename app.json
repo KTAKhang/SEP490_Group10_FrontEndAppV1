@@ -7,44 +7,22 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-
     "ios": {
       "supportsTablet": true
     },
-
     "android": {
-      "package": "com.ktakhang.myshopapps",
-      "edgeToEdgeEnabled": true,
-      "permissions": [
-        "INTERNET",
-        "ACCESS_NETWORK_STATE",
-        "CAMERA",
-        "READ_MEDIA_IMAGES",
-        "ACCESS_FINE_LOCATION",
-        "ACCESS_COARSE_LOCATION",
-        "POST_NOTIFICATIONS"
-      ],
-      "permissionsUsageDescription": {
-        "CAMERA": "Ứng dụng cần camera để chụp ảnh sản phẩm và xác nhận đơn hàng",
-        "READ_MEDIA_IMAGES": "Ứng dụng cần truy cập ảnh để tải ảnh sản phẩm và ảnh đại diện"
-      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.ktakhang.myshopapps"
     },
-
-    "notification": {
-      "icon": "./assets/icon.png",
-      "color": "#ffffff"
-    },
-
     "web": {
       "favicon": "./assets/favicon.png"
     },
