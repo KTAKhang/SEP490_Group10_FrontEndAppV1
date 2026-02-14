@@ -5,6 +5,9 @@ node_modules/
 
 # Expo
 .expo/
+.idea/
+.android/
+
 dist/
 web-build/
 expo-env.d.ts

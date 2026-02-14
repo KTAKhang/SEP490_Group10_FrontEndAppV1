@@ -252,6 +252,7 @@ const ProfileScreen = ({ navigation }) => {
         //         isLoading={isLoading}
         //     />
         // </View>
+
     );
 };
 

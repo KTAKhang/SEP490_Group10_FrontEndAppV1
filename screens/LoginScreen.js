@@ -48,7 +48,7 @@ const LoginScreen = () => {
 
     useEffect(() => {
         if (error) {
-            Alert.alert('Đăng Nhập Thất Bại', error);
+            Alert.alert('Đăng Nhập Thất Bại', 'Vui lòng kiểm tra lại email và mật khẩu');
         }
     }, [error]);
 

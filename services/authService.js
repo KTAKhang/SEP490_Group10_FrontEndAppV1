@@ -1,5 +1,6 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const API_BASE_URL = 'http://192.168.1.6:3001';
 // Hàm đăng nhập
 export async function loginApi({ email, password }) {
@@ -14,12 +15,12 @@ export async function loginApi({ email, password }) {
                     "Accept": "application/json",
                 },
                 withCredentials: true,
+
             }
         );
 
         const data = response.data;
 
-       
 
         if (data.status !== 'OK') {
             throw new Error(data.message || 'Login failed');
@@ -34,6 +35,7 @@ export async function loginApi({ email, password }) {
         throw new Error(error.response?.data?.message || error.message || 'Login failed');
     }
 }
+
 
 export async function logoutApi() {
   try {
@@ -61,7 +63,6 @@ export async function logoutApi() {
     throw new Error(error.message);
   }
 }
-
 
 // ✅ Hàm gửi OTP
 export async function sendOtpApi({ user_name, email, password }) {
