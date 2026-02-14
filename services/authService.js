@@ -1,20 +1,25 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+const API_BASE_URL = 'http://192.168.1.6:3001';
 // Hàm đăng nhập
 export async function loginApi({ email, password }) {
     try {
+         
         const response = await axios.post(
-            'https://youtube-fullstack-nodejs-forbeginer.onrender.com/api/user/sign-in',
+             `${API_BASE_URL}/auth/sign-in`,
             { email, password },
             {
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
                 },
+                withCredentials: true,
             }
         );
 
         const data = response.data;
+
+       
 
         if (data.status !== 'OK') {
             throw new Error(data.message || 'Login failed');
@@ -29,6 +34,34 @@ export async function loginApi({ email, password }) {
         throw new Error(error.response?.data?.message || error.message || 'Login failed');
     }
 }
+
+export async function logoutApi() {
+  try {
+    const refreshToken = await AsyncStorage.getItem("refreshToken");
+
+    const response = await axios.post(
+      `${API_BASE_URL}/auth/logout`,
+      {},
+      {
+        headers: {
+          "x-refresh-token": refreshToken,
+        },
+      }
+    );
+
+    await AsyncStorage.multiRemove([
+      "token",
+      "refreshToken",
+      "user",
+    ]);
+
+    return response.data;
+
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
 
 // ✅ Hàm gửi OTP
 export async function sendOtpApi({ user_name, email, password }) {

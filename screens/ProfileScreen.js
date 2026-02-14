@@ -163,91 +163,95 @@ const ProfileScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
-            <StatusBar
-                barStyle="light-content"
-                backgroundColor={COLORS.secondary}
-                translucent
-            />
-            <LinearGradient
-                colors={COLORS.gradient.primary}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={styles.headerGradient}
-            >
-                <SafeAreaView>
-                    <View style={styles.header}>
-                        <Text style={styles.headerTitle}>Hồ sơ</Text>
-                    </View>
-                </SafeAreaView>
-            </LinearGradient>
-
-            <ScrollView
-                style={styles.content}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.scrollContent}
-            >
-                {isLoading ? (
-                    <InlineLoading
-                        text="Đang tải thông tin..."
-                        style={styles.loadingContainer}
-                        color={COLORS.primary}
-                    />
-                ) : profile && profile.user_name ? (
-                    <>
-                        <ProfileHeader
-                            profile={profile}
-                            onEditPress={() => setEditModalVisible(true)}
-                        />
-                        <PersonalInfoSection
-                            profile={profile}
-                            onChangePasswordPress={() => setPasswordModalVisible(true)}
-                        />
-
-
-                        <OrderHistorySection
-                            orderHistory={orders}
-                            onViewAll={() => navigation?.navigate('OrderHistory')}
-                            onOrderPress={(order) => navigation.navigate('OrderDetails', { orderId: order._id })}
-
-                        />
-
-
-                        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <> <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
                             <Ionicons name="log-out-outline" size={20} color="#ef4444" />
                             <Text style={styles.logoutText}>Đăng xuất</Text>
-                        </TouchableOpacity>
-                    </>
-                ) : (
-                    <Text style={{ textAlign: 'center', marginTop: 20 }}>
-                        Không thể tải thông tin người dùng.
-                    </Text>
-                )}
+                        </TouchableOpacity></>
+        // <View style={styles.container}>
+        //     <StatusBar
+        //         barStyle="light-content"
+        //         backgroundColor={COLORS.secondary}
+        //         translucent
+        //     />
+        //     <LinearGradient
+        //         colors={COLORS.gradient.primary}
+        //         start={{ x: 0, y: 0 }}
+        //         end={{ x: 1, y: 1 }}
+        //         style={styles.headerGradient}
+        //     >
+        //         <SafeAreaView>
+        //             <View style={styles.header}>
+        //                 <Text style={styles.headerTitle}>Hồ sơ</Text>
+        //             </View>
+        //         </SafeAreaView>
+        //     </LinearGradient>
 
-            </ScrollView>
+        //     <ScrollView
+        //         style={styles.content}
+        //         showsVerticalScrollIndicator={false}
+        //         contentContainerStyle={styles.scrollContent}
+        //     >
+        //         {isLoading ? (
+        //             <InlineLoading
+        //                 text="Đang tải thông tin..."
+        //                 style={styles.loadingContainer}
+        //                 color={COLORS.primary}
+        //             />
+        //         ) : profile && profile.user_name ? (
+        //             <>
+        //                 <ProfileHeader
+        //                     profile={profile}
+        //                     onEditPress={() => setEditModalVisible(true)}
+        //                 />
+        //                 <PersonalInfoSection
+        //                     profile={profile}
+        //                     onChangePasswordPress={() => setPasswordModalVisible(true)}
+        //                 />
 
-            <BottomNavigation />
 
-            <EditProfileModal
-                visible={editModalVisible}
-                onClose={() => setEditModalVisible(false)}
-                profile={profile}
-                onSave={handleUpdateProfile}
-            />
+        //                 <OrderHistorySection
+        //                     orderHistory={orders}
+        //                     onViewAll={() => navigation?.navigate('OrderHistory')}
+        //                     onOrderPress={(order) => navigation.navigate('OrderDetails', { orderId: order._id })}
 
-            <ChangePasswordModal
-                visible={passwordModalVisible}
-                onClose={handleClosePasswordModal}
-                currentPassword={currentPassword}
-                newPassword={newPassword}
-                confirmPassword={confirmPassword}
-                setCurrentPassword={setCurrentPassword}
-                setNewPassword={setNewPassword}
-                setConfirmPassword={setConfirmPassword}
-                onSubmit={handleChangePassword}
-                isLoading={isLoading}
-            />
-        </View>
+        //                 />
+
+
+        //                 <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        //                     <Ionicons name="log-out-outline" size={20} color="#ef4444" />
+        //                     <Text style={styles.logoutText}>Đăng xuất</Text>
+        //                 </TouchableOpacity>
+        //             </>
+        //         ) : (
+        //             <Text style={{ textAlign: 'center', marginTop: 20 }}>
+        //                 Không thể tải thông tin người dùng.
+        //             </Text>
+        //         )}
+
+        //     </ScrollView>
+
+        //     <BottomNavigation />
+
+        //     <EditProfileModal
+        //         visible={editModalVisible}
+        //         onClose={() => setEditModalVisible(false)}
+        //         profile={profile}
+        //         onSave={handleUpdateProfile}
+        //     />
+
+        //     <ChangePasswordModal
+        //         visible={passwordModalVisible}
+        //         onClose={handleClosePasswordModal}
+        //         currentPassword={currentPassword}
+        //         newPassword={newPassword}
+        //         confirmPassword={confirmPassword}
+        //         setCurrentPassword={setCurrentPassword}
+        //         setNewPassword={setNewPassword}
+        //         setConfirmPassword={setConfirmPassword}
+        //         onSubmit={handleChangePassword}
+        //         isLoading={isLoading}
+        //     />
+        // </View>
     );
 };
 
