@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   loginApi,
+  loginByGoogleApi,
+  logoutApi,
   sendOtpApi,
   confirmOtpApi,
   forgotPasswordApi,
@@ -15,6 +17,24 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const response = await loginApi({ email, password });
+
+      // Save token to AsyncStorage
+      await AsyncStorage.setItem("token", response.token.access_token);
+      await AsyncStorage.setItem("refreshToken", response.token.refresh_token);
+      await AsyncStorage.setItem("user", JSON.stringify(response.user));
+
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+export const loginByGoogle = createAsyncThunk(
+  "auth/sign-in",
+  async ({ idToken }, { rejectWithValue }) => {
+    try {
+      const response = await loginByGoogleApi(idToken);
 
       // Save token to AsyncStorage
       await AsyncStorage.setItem("token", response.token.access_token);
@@ -59,8 +79,8 @@ export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
   async (_, { dispatch }) => {
     const response = await logoutApi({  });
-    // await AsyncStorage.removeItem("token");
-    // await AsyncStorage.removeItem("user");
+    await AsyncStorage.removeItem("token");
+    await AsyncStorage.removeItem("user");
     return response.message;
   },
 );

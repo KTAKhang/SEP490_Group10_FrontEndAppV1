@@ -29,6 +29,41 @@ export async function loginApi({ email, password }) {
         return {
             user: data.data,
             token: data.token.access_token,
+            refresh_token: data.token.refresh_token,
+        };
+    } catch (error) {
+        // Bắt lỗi từ axios
+        throw new Error(error.response?.data?.message || error.message || 'Login failed');
+    }
+}
+
+export async function loginByGoogleApi(idToken) {
+    try {
+         
+        const response = await axios.post(
+             `${API_BASE_URL}/auth/google`,
+            {idToken},
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                withCredentials: true,
+
+            }
+        );
+
+        const data = response.data;
+
+
+        if (data.status !== 'OK') {
+            throw new Error(data.message || 'Login failed');
+        }
+
+        return {
+            user: data.data,
+            token: data.token.access_token,
+            refresh_token: data.token.refresh_token,
         };
     } catch (error) {
         // Bắt lỗi từ axios
